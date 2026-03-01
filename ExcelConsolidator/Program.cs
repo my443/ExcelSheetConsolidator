@@ -13,7 +13,8 @@ class Program
         if (hasArgs)
         {
             var iniFile = new IniFile();
-            iniFile.LoadFile(@"C:\Users\jvand\source\repos\ExcelConsolidator\config.ini");
+            //iniFile.LoadFile(@"C:\Users\jvand\source\repos\ExcelConsolidator\config.ini");
+            iniFile.LoadFile(args[0]);
 
             // Retrieve the values using the Section and Key names
             string folderPath = iniFile["Paths", "SourceFolder"];
