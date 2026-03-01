@@ -6,11 +6,11 @@ class Program
 {
     static void Main(string[] args)
     {
-        CheckArgs(args);
-        
+        CheckArgs(args);        
 
         string folderPath = @"C:\Users\jvand\source\repos\ExcelConsolidator\SampleFiles\Directory Of Files";
         string templateFilePath = @"C:\Users\jvand\source\repos\ExcelConsolidator\SampleFiles\SampleTemplate.xlsx";
+        string outputFilePath = @"C:\Users\jvand\source\repos\ExcelConsolidator\SampleFiles\OutputFile.xlsx";
 
         var extractionTempalte = new ExtractionTemplate();
 

@@ -9,9 +9,9 @@ namespace ExcelConsolidator.Models
         // A list of cells that are extracted from a single workbook
         // Each cell has its own Worksheet defined,
         //      so this could be rows on multiple worksheets.
-        List<AbsoluteCell> Cells { get; set; } = new();
+        List<CellDefinition> Cells { get; set; } = new();
 
-        public void Add(AbsoluteCell cell) { 
+        public void Add(CellDefinition cell) { 
             Cells.Add(cell);
         }
     }

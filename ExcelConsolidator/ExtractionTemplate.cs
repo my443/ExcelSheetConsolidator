@@ -44,9 +44,9 @@ namespace ExcelConsolidator
             return rowsData;
         }
 
-        private AbsoluteCell MapRowToItem(IXLRangeRow row)
+        private CellDefinition MapRowToItem(IXLRangeRow row)
         {
-            AbsoluteCell newTemplateItem = new AbsoluteCell
+            CellDefinition newTemplateItem = new CellDefinition
             {
                 SourceSheet = row.Cell(1).GetValue<string>(),
                 SourceReference = row.Cell(2).GetValue<string>(),

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ExcelConsolidator.Models
 {
-    internal class AbsoluteCell
+    internal class CellDefinition
     {
         // A Definition of the Source, Destination, and value of each Cell
         // A cell is defined for an absolute location in a Workbook (Sheet and Reference) 

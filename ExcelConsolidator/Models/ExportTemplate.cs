@@ -6,9 +6,9 @@ namespace ExcelConsolidator.Models
 {
     internal class ExportTemplate
     {
-        public List<AbsoluteCell> TemplateItems = new();
+        public List<CellDefinition> TemplateItems = new();
 
-        public void Add(AbsoluteCell cell) {
+        public void Add(CellDefinition cell) {
             TemplateItems.Add(cell);
         }
     }

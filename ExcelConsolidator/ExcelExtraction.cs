@@ -52,7 +52,7 @@ namespace ExcelConsolidator
 
             using (var workbook = new XLWorkbook(workbookFilePath))
             {
-                foreach (AbsoluteCell item in _mappings.TemplateItems)
+                foreach (CellDefinition item in _mappings.TemplateItems)
                 {
                     var worksheet = workbook.Worksheet(item.SourceSheet);
                     var cell = worksheet.Cell(item.SourceReference);
