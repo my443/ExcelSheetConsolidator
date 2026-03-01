@@ -9,7 +9,7 @@ namespace ExcelConsolidator.Models
         // A list of cells that are extracted from a single workbook
         // Each cell has its own Worksheet defined,
         //      so this could be rows on multiple worksheets.
-        List<CellDefinition> Cells { get; set; } = new();
+        public List<CellDefinition> Cells { get; set; } = new();
 
         public void Add(CellDefinition cell) { 
             Cells.Add(cell);

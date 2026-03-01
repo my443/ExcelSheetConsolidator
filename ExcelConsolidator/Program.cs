@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using ExcelConsolidator;
 using ExcelConsolidator.Models;
+using ExcelConsolidator.Services;
 
 class Program
 {
@@ -16,8 +17,9 @@ class Program
 
         ExportTemplate template = extractionTempalte.GetTemplateItems(templateFilePath);
         ExcelExtraction extraction = new ExcelExtraction(template);
-        extraction.ExtractDataFromDirectory(folderPath);
+        ExportRowsCollection rowsCollection = extraction.ExtractDataFromDirectory(folderPath);
 
+        ExcelExport excelExport = new ExcelExport(outputFilePath, rowsCollection);
     }
 
     private static void CheckArgs(string[] args)

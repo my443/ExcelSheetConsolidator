@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ExcelConsolidator
+namespace ExcelConsolidator.Services
 {
     internal class ExtractionTemplate
     {
