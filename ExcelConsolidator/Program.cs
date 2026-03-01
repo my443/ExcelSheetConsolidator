@@ -19,7 +19,7 @@ class Program
         ExcelExtraction extraction = new ExcelExtraction(template);
         ExportRowsCollection rowsCollection = extraction.ExtractDataFromDirectory(folderPath);
 
-        ExcelExport excelExport = new ExcelExport(outputFilePath, rowsCollection);
+        ExcelExport excelExport = new ExcelExport(outputFilePath, rowsCollection, template);
     }
 
     private static void CheckArgs(string[] args)

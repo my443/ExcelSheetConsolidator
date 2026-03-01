@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Spreadsheet;
 using ExcelConsolidator.Models;
 using System;
 using System.Collections.Generic;
@@ -8,11 +9,11 @@ namespace ExcelConsolidator.Services
 {
     internal class ExcelExport
     {
-        public ExcelExport(string filePath, ExportRowsCollection rowsCollection) { 
-            SaveDataToExcel(filePath, rowsCollection);
+        public ExcelExport(string filePath, ExportRowsCollection rowsCollection, ExportTemplate template) { 
+            SaveDataToExcel(filePath, rowsCollection, template);
         }
 
-        private void SaveDataToExcel(string filePath, ExportRowsCollection rowsCollection) {
+        private void SaveDataToExcel(string filePath, ExportRowsCollection rowsCollection, ExportTemplate template) {
             var distinctSheets = rowsCollection.Rows
                                     .SelectMany(row => row.Cells)     // Flatten all Cells from all Rows into one list
                                     .Select(cell => cell.OutputSheet) // Grab just the OutputSheet string
@@ -26,10 +27,19 @@ namespace ExcelConsolidator.Services
                     var worksheet = workbook.Worksheets.Add(sheet);
                 }
 
+                // Add the column headings for each one.
+                foreach (var heading in template.TemplateItems) {
+                    workbook.Worksheet(heading.OutputSheet).Cell(1, heading.OutputColumn).Value = heading.OutputColumnName;
+                }
 
-                // Writing to a specific cell (Row, Column) or address
-                workbook.Worksheet("Sheet2").Cell("A2").Value = "Hello World!";
-                
+                int rowNumber = 2;
+
+                foreach (var row in rowsCollection.Rows) {
+                    foreach (var cell in row.Cells) {
+                        workbook.Worksheet(cell.OutputSheet).Cell(rowNumber, cell.OutputColumn).Value = cell.CellValue;
+                    }
+                    rowNumber++;
+                }               
 
                 // Save the file
                 workbook.SaveAs(filePath);
