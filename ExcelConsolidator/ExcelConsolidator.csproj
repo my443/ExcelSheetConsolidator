@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="ClosedXML" Version="0.105.0" />
+    <PackageReference Include="INIParser" Version="1.0.4" />
   </ItemGroup>
 
 </Project>

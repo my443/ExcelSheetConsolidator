@@ -2,41 +2,58 @@
 using ExcelConsolidator;
 using ExcelConsolidator.Models;
 using ExcelConsolidator.Services;
+using INIParser;
 
 class Program
 {
     static void Main(string[] args)
     {
-        CheckArgs(args);        
+        var hasArgs = CheckArgs(args);
 
-        string folderPath = @"C:\Users\jvand\source\repos\ExcelConsolidator\SampleFiles\Directory Of Files";
-        string templateFilePath = @"C:\Users\jvand\source\repos\ExcelConsolidator\SampleFiles\SampleTemplate.xlsx";
-        string outputFilePath = @"C:\Users\jvand\source\repos\ExcelConsolidator\SampleFiles\OutputFile.xlsx";
+        if (hasArgs)
+        {
+            var iniFile = new IniFile();
+            iniFile.LoadFile(@"C:\Users\jvand\source\repos\ExcelConsolidator\config.ini");
 
-        var extractionTempalte = new ExtractionTemplate();
+            // Retrieve the values using the Section and Key names
+            string folderPath = iniFile["Paths", "SourceFolder"];
+            string templateFilePath = iniFile["Paths", "TemplateFile"];
+            string outputFilePath = iniFile["Paths", "OutputFile"];
 
-        ExportTemplate template = extractionTempalte.GetTemplateItems(templateFilePath);
-        ExcelExtraction extraction = new ExcelExtraction(template);
-        ExportRowsCollection rowsCollection = extraction.ExtractDataFromDirectory(folderPath);
+            //string folderPath = @"C:\Users\jvand\source\repos\ExcelConsolidator\SampleFiles\Directory Of Files";
+            //string templateFilePath = @"C:\Users\jvand\source\repos\ExcelConsolidator\SampleFiles\SampleTemplate.xlsx";
+            //string outputFilePath = @"C:\Users\jvand\source\repos\ExcelConsolidator\SampleFiles\OutputFile.xlsx";
 
-        ExcelExport excelExport = new ExcelExport(outputFilePath, rowsCollection, template);
+            var extractionTempalte = new ExtractionTemplate();
+
+            ExportTemplate template = extractionTempalte.GetTemplateItems(templateFilePath);
+            ExcelExtraction extraction = new ExcelExtraction(template);
+            ExportRowsCollection rowsCollection = extraction.ExtractDataFromDirectory(folderPath);
+
+            ExcelExport excelExport = new ExcelExport(outputFilePath, rowsCollection, template);
+        }
     }
 
-    private static void CheckArgs(string[] args)
+    private static bool CheckArgs(string[] args)
     {
         // Check if any arguments were passed
         if (args.Length > 0)
         {
-            Console.WriteLine($"Total arguments: {args.Length}");
+            //Console.WriteLine($"Total arguments: {args.Length}");
 
-            foreach (string arg in args)
-            {
-                Console.WriteLine($"Argument: {arg}");
-            }
+            //foreach (string arg in args)
+            //{
+            //    Console.WriteLine($"Argument: {arg}");
+            //}
+            return true;
         }
         else
         {
-            Console.WriteLine("No arguments were provided.");
+            Console.WriteLine("You didn't add a path to the configuration file" +
+                "\nCorrect execution of this app looks like: " +
+                "\nExcelConsolidator \"c:\\mydirectory\\config.ini\"");
+
+            return false;
         }
     }
 }
