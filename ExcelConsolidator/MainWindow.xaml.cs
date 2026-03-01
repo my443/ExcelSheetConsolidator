@@ -1,20 +1,34 @@
-﻿// See https://aka.ms/new-console-template for more information
-using ExcelConsolidator;
-using ExcelConsolidator.Models;
+﻿using ExcelConsolidator.Models;
 using ExcelConsolidator.Services;
 using INIParser;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
-class Program
+namespace ExcelConsolidator
 {
-    static void Main(string[] args)
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
     {
-        var hasArgs = CheckArgs(args);
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
 
-        if (hasArgs)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             var iniFile = new IniFile();
-            //iniFile.LoadFile(@"C:\Users\jvand\source\repos\ExcelConsolidator\config.ini");
-            iniFile.LoadFile(args[0]);
+            iniFile.LoadFile(@"C:\Users\jvand\source\repos\ExcelConsolidator\config.ini");
 
             // Retrieve the values using the Section and Key names
             string folderPath = iniFile["Paths", "SourceFolder"];
@@ -32,29 +46,6 @@ class Program
             ExportRowsCollection rowsCollection = extraction.ExtractDataFromDirectory(folderPath);
 
             ExcelExport excelExport = new ExcelExport(outputFilePath, rowsCollection, template);
-        }
-    }
-
-    private static bool CheckArgs(string[] args)
-    {
-        // Check if any arguments were passed
-        if (args.Length > 0)
-        {
-            //Console.WriteLine($"Total arguments: {args.Length}");
-
-            //foreach (string arg in args)
-            //{
-            //    Console.WriteLine($"Argument: {arg}");
-            //}
-            return true;
-        }
-        else
-        {
-            Console.WriteLine("You didn't add a path to the configuration file" +
-                "\nCorrect execution of this app looks like: " +
-                "\nExcelConsolidator \"c:\\mydirectory\\config.ini\"");
-
-            return false;
         }
     }
 }
