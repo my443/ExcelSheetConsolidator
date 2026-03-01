@@ -8,10 +8,15 @@ class Program
     {
         CheckArgs(args);
         
-        string filepath = @"C:\Users\jvand\source\repos\ExcelConsolidator\SampleFiles\SampleTemplate.xlsx";
-        var MappingTemplate = new MappingTemplate();
 
-        List<AbsoluteCell> list = MappingTemplate.GetTemplateItems(filepath);
+        string folderPath = @"C:\Users\jvand\source\repos\ExcelConsolidator\SampleFiles\Directory Of Files";
+        string templateFilePath = @"C:\Users\jvand\source\repos\ExcelConsolidator\SampleFiles\SampleTemplate.xlsx";
+
+        var extractionTempalte = new ExtractionTemplate();
+
+        ExportTemplate template = extractionTempalte.GetTemplateItems(templateFilePath);
+        ExcelExtraction extraction = new ExcelExtraction(template);
+        extraction.ExtractDataFromDirectory(folderPath);
 
     }
 

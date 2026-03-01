@@ -8,12 +8,12 @@ using System.Text;
 
 namespace ExcelConsolidator
 {
-    internal class MappingTemplate
+    internal class ExtractionTemplate
     {
-        public List<AbsoluteCell> TemplateItems { get; set; }
-        public List<AbsoluteCell> GetTemplateItems(string filepath)
+        public ExportTemplate TemplateItems { get; set; }
+        public ExportTemplate GetTemplateItems(string filepath)
         {
-            var items = new List<AbsoluteCell>();
+            var items = new ExportTemplate();
 
             try
             {
@@ -26,22 +26,18 @@ namespace ExcelConsolidator
                 }
             }
             catch {
-                // This is just if it fails to open the book.
+                // This is just if it fails to open the workbook.
             }
 
             return items;
         }
 
-        private List<AbsoluteCell> GetRowsData(IXLRangeRows rows)
+        private ExportTemplate GetRowsData(IXLRangeRows rows)
         {
-            var rowsData = new List<AbsoluteCell>();
+            var rowsData = new ExportTemplate();
 
             foreach (var row in rows)
             {
-                // If the first cell is empty, we treat this as a "blank row" and stop
-                // This isn't needed because we used worksheet.LastRowUsed() above.
-                //if (row.Cell(1).IsEmpty()) break;
-
                 rowsData.Add(MapRowToItem(row));
             }
 

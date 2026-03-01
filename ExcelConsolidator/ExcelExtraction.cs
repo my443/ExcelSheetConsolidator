@@ -9,12 +9,12 @@ namespace ExcelConsolidator
 {
     internal class ExcelExtraction
     {
-        private List<AbsoluteCell> _mappings;
+        private ExportTemplate _mappings;
         private ExportRowsCollection _outputData;
         public ExportRowsCollection ExportRowsCollection { get => _outputData; }
-        public ExcelExtraction(List<AbsoluteCell> TemplateItems)
+        public ExcelExtraction(ExportTemplate template)
         {
-            _mappings = TemplateItems;
+            _mappings = template;
             _outputData = new();
         }
 
@@ -37,7 +37,7 @@ namespace ExcelConsolidator
             ExportRowsCollection outputData = new ExportRowsCollection();
             foreach (string file in listOfFiles)
             {
-                var row = ExtractDataFromWorkBook($@"{folderPath}\{file}");
+                var row = ExtractDataFromWorkBook($@"{file}");
                 outputData.Add(row);
             }
 
@@ -52,7 +52,7 @@ namespace ExcelConsolidator
 
             using (var workbook = new XLWorkbook(workbookFilePath))
             {
-                foreach (AbsoluteCell item in _mappings)
+                foreach (AbsoluteCell item in _mappings.TemplateItems)
                 {
                     var worksheet = workbook.Worksheet(item.SourceSheet);
                     var cell = worksheet.Cell(item.SourceReference);
