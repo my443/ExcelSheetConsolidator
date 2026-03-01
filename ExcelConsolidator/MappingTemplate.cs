@@ -10,10 +10,10 @@ namespace ExcelConsolidator
 {
     internal class MappingTemplate
     {
-        public List<Models.Cell> TemplateItems { get; set; }
-        public List<Models.Cell> GetTemplateItems(string filepath)
+        public List<AbsoluteCell> TemplateItems { get; set; }
+        public List<AbsoluteCell> GetTemplateItems(string filepath)
         {
-            var items = new List<Models.Cell>();
+            var items = new List<AbsoluteCell>();
 
             try
             {
@@ -32,9 +32,9 @@ namespace ExcelConsolidator
             return items;
         }
 
-        private List<Models.Cell> GetRowsData(IXLRangeRows rows)
+        private List<AbsoluteCell> GetRowsData(IXLRangeRows rows)
         {
-            var rowsData = new List<Models.Cell>();
+            var rowsData = new List<AbsoluteCell>();
 
             foreach (var row in rows)
             {
@@ -48,9 +48,9 @@ namespace ExcelConsolidator
             return rowsData;
         }
 
-        private Models.Cell MapRowToItem(IXLRangeRow row)
+        private AbsoluteCell MapRowToItem(IXLRangeRow row)
         {
-            Models.Cell newTemplateItem = new Models.Cell
+            AbsoluteCell newTemplateItem = new AbsoluteCell
             {
                 SourceSheet = row.Cell(1).GetValue<string>(),
                 SourceReference = row.Cell(2).GetValue<string>(),

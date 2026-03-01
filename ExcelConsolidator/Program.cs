@@ -11,7 +11,7 @@ class Program
         string filepath = @"C:\Users\jvand\source\repos\ExcelConsolidator\SampleFiles\SampleTemplate.xlsx";
         var MappingTemplate = new MappingTemplate();
 
-        List<Cell> list = MappingTemplate.GetTemplateItems(filepath);
+        List<AbsoluteCell> list = MappingTemplate.GetTemplateItems(filepath);
 
     }
 

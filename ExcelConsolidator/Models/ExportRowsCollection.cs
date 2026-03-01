@@ -4,9 +4,14 @@ using System.Text;
 
 namespace ExcelConsolidator.Models
 {
-    internal class WorkbookOutput
+    internal class ExportRowsCollection
     {
         // A list of Workbook Extractions that will be tranformed into rows in the output workbook. 
-        List<WorkbookExtraction> Rows { get; set; }
+        List<ExportRow> Rows { get; set; } = new();
+
+        public void Add(ExportRow row)
+        {
+            Rows.Add(row);
+        }
     }
 }

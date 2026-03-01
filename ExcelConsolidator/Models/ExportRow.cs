@@ -4,14 +4,14 @@ using System.Text;
 
 namespace ExcelConsolidator.Models
 {
-    internal class WorkbookExtraction
+    internal class ExportRow
     {
         // A list of cells that are extracted from a single workbook
         // Each cell has its own Worksheet defined,
         //      so this could be rows on multiple worksheets.
-        List<Cell> Cells {  get; set; }
+        List<AbsoluteCell> Cells { get; set; } = new();
 
-        public void Add(Cell cell) { 
+        public void Add(AbsoluteCell cell) { 
             Cells.Add(cell);
         }
     }
