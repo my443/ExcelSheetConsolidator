@@ -18,7 +18,7 @@ namespace ExcelConsolidator
         private string? _folderPath;
         private string? _templateFilePath;
         private string? _outputFilePath;
-        private bool SubmitIsEnabled {  get; set; } = false;
+        public bool SubmitIsEnabled { get; set; } = false;
 
         public string FolderPathDisplay
         {
