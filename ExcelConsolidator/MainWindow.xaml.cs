@@ -83,11 +83,11 @@ namespace ExcelConsolidator
                 ExportRowsCollection rowsCollection = extraction.ExtractDataFromDirectory(folderPath);
 
                 ExcelExport excelExport = new ExcelExport(outputFilePath, rowsCollection, template);
-                _statusMessage = $"Extraction successfully saved to {_outputFilePath}";
+                _statusMessage = $"Extraction successfully saved to {_outputFilePath} [{DateTime.Now}]";
             }
             catch (Exception ex)
             {
-                _statusMessage = $"Extraction failed with exception: {ex.Message}";
+                _statusMessage = $"Extraction failed with exception: {ex.Message} [{DateTime.Now}]";
             }
             OnPropertyChanged(nameof(StatusMessage));
 

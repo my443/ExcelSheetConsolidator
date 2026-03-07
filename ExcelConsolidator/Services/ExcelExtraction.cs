@@ -55,14 +55,36 @@ namespace ExcelConsolidator.Services
             {
                 foreach (CellDefinition item in _mappings.TemplateItems)
                 {
-                    var worksheet = workbook.Worksheet(item.SourceSheet);
-                    var cell = worksheet.Cell(item.SourceReference);
+                    try
+                    {
+                        var worksheet = workbook.Worksheet(item.SourceSheet);
+                        var cell = worksheet.Cell(item.SourceReference);
 
-                    // Get the value (as a generic object or specific type)
-                    XLCellValue value = cell.Value;
-                    item.CellValue = value;
+                        var result = new CellDefinition
+                        {
+                            SourceSheet = item.SourceSheet,
+                            SourceReference = item.SourceReference,
+                            OutputSheet = item.OutputSheet,
+                            OutputColumn = item.OutputColumn,
+                            OutputColumnName = item.OutputColumnName,
+                            CellValue = cell.Value
+                        };
 
-                    row.Add(item);
+                        row.Add(result);
+                    }
+                    catch (Exception)
+                    {
+                        var errorResult = new CellDefinition
+                        {
+                            SourceSheet = item.SourceSheet,
+                            SourceReference = item.SourceReference,
+                            OutputSheet = item.OutputSheet,
+                            OutputColumn = item.OutputColumn,
+                            OutputColumnName = item.OutputColumnName,
+                            CellValue = $"Error: {item.SourceSheet}!{item.SourceReference} not found in {workbookFilePath}."
+                        };
+                        row.Add(errorResult);
+                    }
                 }
             }
 
