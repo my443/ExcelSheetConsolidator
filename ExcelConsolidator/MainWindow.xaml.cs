@@ -51,19 +51,23 @@ namespace ExcelConsolidator
             CompleteExtraction();
         }
 
-        private static void CompleteExtraction()
+        private void CompleteExtraction()
         {
-            var iniFile = new IniFile();
-            iniFile.LoadFile(@"C:\Users\jvand\source\repos\ExcelConsolidator\config.ini");
+            //var iniFile = new IniFile();
+            //iniFile.LoadFile(@"C:\Users\jvand\source\repos\ExcelConsolidator\config.ini");
 
-            // Retrieve the values using the Section and Key names
-            string folderPath = iniFile["Paths", "SourceFolder"];
-            string templateFilePath = iniFile["Paths", "TemplateFile"];
-            string outputFilePath = iniFile["Paths", "OutputFile"];
+            //// Retrieve the values using the Section and Key names
+            //string folderPath = iniFile["Paths", "SourceFolder"];
+            //string templateFilePath = iniFile["Paths", "TemplateFile"];
+            //string outputFilePath = iniFile["Paths", "OutputFile"];
 
             //string folderPath = @"C:\Users\jvand\source\repos\ExcelConsolidator\SampleFiles\Directory Of Files";
             //string templateFilePath = @"C:\Users\jvand\source\repos\ExcelConsolidator\SampleFiles\SampleTemplate.xlsx";
             //string outputFilePath = @"C:\Users\jvand\source\repos\ExcelConsolidator\SampleFiles\OutputFile.xlsx";
+                  
+            string folderPath = _folderPath;
+            string templateFilePath = _templateFilePath;
+            string outputFilePath = _outputFilePath;
 
             var extractionTempalte = new ExtractionTemplate();
 
