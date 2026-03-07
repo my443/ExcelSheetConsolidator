@@ -19,3 +19,8 @@ The quotes are important in your command. You can put this command into a batch 
 
 The ExcelConsolidator will read the MappingTemplate and consolidate all of the data from each Excel file in the Source File Directory 
 into a single spreadsheet in the file that you have defined.
+
+### TODO
+1. Silently fail if it can't find the cell it is looking for. 
+2. Include a list of files that were successfully extracted in your output file. (And a include the ones that failed.)
+3. 
