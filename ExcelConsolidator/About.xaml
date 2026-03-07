@@ -14,12 +14,7 @@
             Written by: <Bold>John van Dijk</Bold> (2026)<LineBreak/>
                 License: M.I.T.
             </TextBlock>
-            <TextBlock TextWrapping="Wrap" FontSize="14" TextAlignment="Center">
-            For documentation visit 
-            <Hyperlink NavigateUri="https://github.com/my443/ExcelSheetConsolidator/Documentation" RequestNavigate="Hyperlink_RequestNavigate">
-                https://github.com/my443/ExcelSheetConsolidator/Documentation
-            </Hyperlink>.
-            </TextBlock>
+
             <Button Content="Close" Width="80" Margin="0,20,0,0" Click="Close_Click" HorizontalAlignment="Right"/>
         </StackPanel>
 

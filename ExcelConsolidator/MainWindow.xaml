@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ExcelConsolidator"
         mc:Ignorable="d"
-        Title="Excel Extractor" Height="500" Width="800" MaxHeight="500" MaxWidth="800">
+        Title="Excel Sheet Consolidator" Height="500" Width="800" MaxHeight="500" MaxWidth="800">
     <Grid>
 
 
@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Row="0" Background="#F3F3F3" LastChildFill="False">
-            <Label Content="Excel Extractor" 
+            <Label Content="Excel Sheet Consolidator" 
                    DockPanel.Dock="Left" 
                    VerticalAlignment="Center" 
                    Margin="10,0" 
@@ -32,7 +32,7 @@
         </DockPanel>
         <StackPanel Grid.Row="1">
             <TextBlock Margin="20 20 0 0">
-                <Bold>Excel Extractor</Bold> will consolidate data from a directory of similar Excel files into one spreadsheet.<LineBreak/> 
+                <Bold>Excel Sheet Consolidator</Bold> will combine data from a directory of similar Excel files into one spreadsheet.<LineBreak/> 
                 Select the source directory, template file, and output file below.
             </TextBlock>
         </StackPanel>
