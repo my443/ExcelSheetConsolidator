@@ -4,6 +4,7 @@ using INIParser;
 using Microsoft.Win32;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 
 namespace ExcelConsolidator
 {
@@ -148,6 +149,13 @@ namespace ExcelConsolidator
                 OnPropertyChanged(nameof(OutputFilePath));
             }
             CheckIfSubmitShouldBeEnabled();
+        }
+
+        private void ShowAbout_Click(object sender, RoutedEventArgs e)
+        {
+            About popup = new About();
+            popup.Owner = this; // Keeps the popup centered and linked to this window
+            popup.ShowDialog(); // This pauses the code here until the popup is closed
         }
 
         private void CheckIfSubmitShouldBeEnabled()

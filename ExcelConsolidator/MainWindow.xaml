@@ -27,7 +27,8 @@
                     DockPanel.Dock="Right" 
                     VerticalAlignment="Center" 
                     Padding="10,2" 
-                    Margin="10,0"/>
+                    Margin="10,0"
+                    Click="ShowAbout_Click"/>
         </DockPanel>
         <StackPanel Grid.Row="1">
             <TextBlock Margin="20 20 0 0">
