@@ -55,7 +55,7 @@
             </StackPanel>
         </Grid>
         <StatusBar Grid.Row="2">
-            <Label>Waiting for files to be selected.</Label>
+            <Label Content="{Binding StatusMessage}"></Label>
         </StatusBar>
     </Grid>
 </Window>

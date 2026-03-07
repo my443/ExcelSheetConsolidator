@@ -18,26 +18,39 @@ namespace ExcelConsolidator
         private string? _folderPath;
         private string? _templateFilePath;
         private string? _outputFilePath;
+        private string _statusMessage = "Waiting for files to be selected.";
         public bool SubmitIsEnabled { get; set; } = false;
+
 
         public string FolderPathDisplay
         {
             get
-            {                
+            {
                 return _folderPath ?? "No folder path selected.";
             }
         }
 
         public string TemplateFilePath
         {
-            get {
+            get
+            {
                 return _templateFilePath ?? "No template selected.";
             }
         }
 
-        public string OutputFilePath {
-            get {
+        public string OutputFilePath
+        {
+            get
+            {
                 return _outputFilePath ?? "No output file selected.";
+            }
+        }
+
+        public string StatusMessage
+        {
+            get
+            {
+                return _statusMessage;
             }
         }
         public MainWindow()
@@ -53,29 +66,31 @@ namespace ExcelConsolidator
 
         private void CompleteExtraction()
         {
-            //var iniFile = new IniFile();
-            //iniFile.LoadFile(@"C:\Users\jvand\source\repos\ExcelConsolidator\config.ini");
 
-            //// Retrieve the values using the Section and Key names
-            //string folderPath = iniFile["Paths", "SourceFolder"];
-            //string templateFilePath = iniFile["Paths", "TemplateFile"];
-            //string outputFilePath = iniFile["Paths", "OutputFile"];
-
-            //string folderPath = @"C:\Users\jvand\source\repos\ExcelConsolidator\SampleFiles\Directory Of Files";
-            //string templateFilePath = @"C:\Users\jvand\source\repos\ExcelConsolidator\SampleFiles\SampleTemplate.xlsx";
-            //string outputFilePath = @"C:\Users\jvand\source\repos\ExcelConsolidator\SampleFiles\OutputFile.xlsx";
-                  
             string folderPath = _folderPath;
             string templateFilePath = _templateFilePath;
             string outputFilePath = _outputFilePath;
 
-            var extractionTempalte = new ExtractionTemplate();
+            _statusMessage = "Extraction in progress.";
+            OnPropertyChanged(nameof(StatusMessage));
 
-            ExportTemplate template = extractionTempalte.GetTemplateItems(templateFilePath);
-            ExcelExtraction extraction = new ExcelExtraction(template);
-            ExportRowsCollection rowsCollection = extraction.ExtractDataFromDirectory(folderPath);
+            try
+            {
+                var extractionTempalte = new ExtractionTemplate();
 
-            ExcelExport excelExport = new ExcelExport(outputFilePath, rowsCollection, template);
+                ExportTemplate template = extractionTempalte.GetTemplateItems(templateFilePath);
+                ExcelExtraction extraction = new ExcelExtraction(template);
+                ExportRowsCollection rowsCollection = extraction.ExtractDataFromDirectory(folderPath);
+
+                ExcelExport excelExport = new ExcelExport(outputFilePath, rowsCollection, template);
+                _statusMessage = $"Extraction successfully saved to {_outputFilePath}";
+            }
+            catch (Exception ex)
+            {
+                _statusMessage = $"Extraction failed with exception: {ex.Message}";
+            }
+            OnPropertyChanged(nameof(StatusMessage));
+
         }
 
         private void SelectSourceFolder_Click(object sender, RoutedEventArgs e)
@@ -103,7 +118,8 @@ namespace ExcelConsolidator
 
         }
 
-        private void SelectTemplateFile_Click(object sender, RoutedEventArgs e) {
+        private void SelectTemplateFile_Click(object sender, RoutedEventArgs e)
+        {
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
@@ -134,7 +150,8 @@ namespace ExcelConsolidator
             CheckIfSubmitShouldBeEnabled();
         }
 
-        private void CheckIfSubmitShouldBeEnabled() {
+        private void CheckIfSubmitShouldBeEnabled()
+        {
             SubmitIsEnabled = (_folderPath != null && _templateFilePath != null && _outputFilePath != null);
             //MessageBox.Show(SubmitIsEnabled.ToString());
             OnPropertyChanged(nameof(SubmitIsEnabled));
