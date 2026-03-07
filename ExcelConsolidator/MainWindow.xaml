@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ExcelConsolidator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="800" MaxHeight="500" MaxWidth="800">
     <Grid>
 
 
@@ -32,18 +32,18 @@
         <Grid Grid.Row="1" Margin="20">
             <StackPanel>
                 <StackPanel Margin="0,10">
-                    <Button Content="Select Source Folder" Click="SelectSourceFolder_Click" Width="200" HorizontalAlignment="Left"/>
-                    <Label Content="{Binding FolderPathDisplay}" Background="#FF7F1616" Foreground="White" Width="400" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+                    <Button Content="Select Source Folder" Click="SelectSourceFolder_Click" Width="200" Height="40" HorizontalAlignment="Left"/>
+                    <Label Content="{Binding FolderPathDisplay}" Background="#FFDEDEDE" Foreground="Black"  HorizontalAlignment="Stretch" Margin="0,5,0,0"/>
                 </StackPanel>
 
                 <StackPanel Margin="0,10">
-                    <Button Content="Select Template File" Click="SelectTemplateFile_Click" Width="200" HorizontalAlignment="Left"/>
-                    <Label Content="{Binding TemplateFilePath}" Background="#FF7F1616" Foreground="White" Width="400" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+                    <Button Content="Select Template File" Click="SelectTemplateFile_Click" Width="200" Height="40" HorizontalAlignment="Left"/>
+                    <Label Content="{Binding TemplateFilePath}" Background="#FFDEDEDE" Foreground="Black"  HorizontalAlignment="Stretch" Margin="0,5,0,0"/>
                 </StackPanel>
 
                 <StackPanel Margin="0,10">
-                    <Button Content="Select Output File" Click="SelectOutputFile_Click" Width="200" HorizontalAlignment="Left"/>
-                    <Label Content="{Binding OutputFilePath}" Background="#FF7F1616" Foreground="White" Width="400" HorizontalAlignment="Left" Margin="0,5,0,0"/>
+                    <Button Content="Select Output File" Click="SelectOutputFile_Click" Width="200" Height="40" HorizontalAlignment="Left"/>
+                    <Label Content="{Binding OutputFilePath}" Background="#FFDEDEDE" Foreground="Black"  HorizontalAlignment="Stretch" Margin="0,5,0,0"/>
                 </StackPanel>
 
                 <Button Content="Consolidate Workbooks" 
