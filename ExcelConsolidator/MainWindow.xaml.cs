@@ -94,9 +94,46 @@ namespace ExcelConsolidator
                 OnPropertyChanged(nameof(FolderPathDisplay));
 
                 // Optional: Update button states
-                //CheckIfSubmitShouldBeEnabled();
+                CheckIfSubmitShouldBeEnabled();
             }
 
+        }
+
+        private void SelectTemplateFile_Click(object sender, RoutedEventArgs e) {
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            openFileDialog.Filter = "Excel Workbooks (*.xlsx)|*.xlsx|All Files (*.*)|*.*";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                _templateFilePath = openFileDialog.FileName;
+            }
+            OnPropertyChanged(nameof(TemplateFilePath));
+            CheckIfSubmitShouldBeEnabled();
+        }
+
+        private void SelectOutputFile_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+            saveFileDialog.Filter = "Excel Workbooks (*.xlsx)|*.xlsx|All Files (*.*)|*.*";
+            saveFileDialog.DefaultExt = "xlsx";
+            saveFileDialog.Title = "Select where to save the consolidated file";
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                _outputFilePath = saveFileDialog.FileName;
+
+                OnPropertyChanged(nameof(OutputFilePath));
+            }
+            CheckIfSubmitShouldBeEnabled();
+        }
+
+        private void CheckIfSubmitShouldBeEnabled() {
+            SubmitIsEnabled = (_folderPath != null && _templateFilePath != null && _outputFilePath != null);
+            //MessageBox.Show(SubmitIsEnabled.ToString());
+            OnPropertyChanged(nameof(SubmitIsEnabled));
         }
 
         protected void OnPropertyChanged(string propertyName)
