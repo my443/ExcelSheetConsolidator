@@ -62,13 +62,26 @@
                     </StackPanel>
                     <Label Content="{Binding OutputFilePath}" Background="#FFDEDEDE" Foreground="Black"  HorizontalAlignment="Stretch" Margin="0,5,0,0"/>
                 </StackPanel>
+                <Grid Margin="0,5,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-                <Button Content="Consolidate Workbooks" 
-                    HorizontalAlignment="Right" 
-                    Margin="0,5,0,0" 
-                    Height="49" Width="232" 
-                    Click="Button_Click" 
-                    IsEnabled="{Binding SubmitIsEnabled}"/>
+                    <ProgressBar x:Name="BusyProgressBar"
+                             Height="20"
+                             IsIndeterminate="True"
+                             Visibility="Collapsed"
+                             VerticalAlignment="Center"
+                             Margin="0,0,10,0"/>
+
+                    <Button Grid.Column="1"
+                        Content="Consolidate Workbooks"
+                        Height="49"
+                        Width="232"
+                        Click="Button_Click"
+                        IsEnabled="{Binding SubmitIsEnabled}" />
+                </Grid>
             </StackPanel>
         </Grid>
         <StatusBar Grid.Row="3">
