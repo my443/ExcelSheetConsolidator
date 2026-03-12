@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ExcelConsolidator"
         mc:Ignorable="d"
-        Title="About" Height="220" Width="400">
+        Title="About" Height="220" Width="400"
+        MaxHeight="220" MaxWidth="400"
+        MinHeight="220" MinWidth="400">
     <Grid>
 
         <StackPanel Margin="20">

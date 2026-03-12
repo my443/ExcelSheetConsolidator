@@ -3,6 +3,7 @@ using ExcelConsolidator.Services;
 using INIParser;
 using Microsoft.Win32;
 using System.ComponentModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 
@@ -106,17 +107,27 @@ namespace ExcelConsolidator
             // 2. Show the dialog and check if the user clicked "OK"
             if (dialog.ShowDialog() == true)
             {
-                // 3. Update your private variable
+
                 _folderPath = dialog.FolderName;
-
-                // 4. IMPORTANT: Tell the UI that 'FolderPathDisplay' has changed
-                // This is what fixes the "blank display" issue when the path updates
                 OnPropertyChanged(nameof(FolderPathDisplay));
-
-                // Optional: Update button states
                 CheckIfSubmitShouldBeEnabled();
+
+                CheckIfFolderHasExcelFiles();
             }
 
+        }
+
+        private void CheckIfFolderHasExcelFiles()
+        {
+            string[] excelFilesList = Directory.GetFiles(_folderPath, "*.xlsx")
+                                .Concat(Directory.GetFiles(_folderPath, "*.xlsm"))
+                                .ToArray();
+
+            if (excelFilesList.Length == 0)
+            {
+                _statusMessage = "There are no .xlsx or .xlsm files in the directory you selected.";
+                OnPropertyChanged(nameof(StatusMessage));
+            }
         }
 
         private void SelectTemplateFile_Click(object sender, RoutedEventArgs e)

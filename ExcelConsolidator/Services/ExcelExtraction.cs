@@ -29,7 +29,9 @@ namespace ExcelConsolidator.Services
 
         private string[] GetListOfExcelFilesFromDirectory(string folderPath)
         {
-            string[] excelFilesList = Directory.GetFiles(folderPath, "*.xlsx");
+            string[] excelFilesList = Directory.GetFiles(folderPath, "*.xlsx")
+                                                .Concat(Directory.GetFiles(folderPath, "*.xlsm"))
+                                                .ToArray();
             return excelFilesList;
         }
 
